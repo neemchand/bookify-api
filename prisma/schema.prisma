@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum EventStatus {
+  DRAFT
+  PUBLISHED
+  CANCELLED
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  EXPIRED
+}
+
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  role         Role      @default(USER)
+  bookings     Booking[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@map("users")
+}
+
+model Event {
+  id          String       @id @default(uuid())
+  title       String
+  description String
+  venue       String
+  startsAt    DateTime
+  status      EventStatus  @default(PUBLISHED)
+  tiers       TicketTier[]
+  bookings    Booking[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([status, startsAt])
+  @@map("events")
+}
+
+model TicketTier {
+  id             String    @id @default(uuid())
+  eventId        String
+  event          Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  name           String
+  priceCents     Int
+  totalSeats     Int
+  availableSeats Int
+  bookings       Booking[]
+
+  @@index([eventId])
+  @@map("ticket_tiers")
+}
+
+model Booking {
+  id             String        @id @default(uuid())
+  userId         String
+  user           User          @relation(fields: [userId], references: [id])
+  eventId        String
+  event          Event         @relation(fields: [eventId], references: [id])
+  tierId         String
+  tier           TicketTier    @relation(fields: [tierId], references: [id])
+  quantity       Int
+  totalCents     Int
+  status         BookingStatus @default(PENDING)
+  expiresAt      DateTime
+  idempotencyKey String?       @unique
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([userId])
+  @@index([status, expiresAt])
+  @@map("bookings")
+}
