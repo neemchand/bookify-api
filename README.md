@@ -1,5 +1,9 @@
 # Bookify — Event Booking API
 
+[![CI](https://github.com/neemchand/bookify-api/actions/workflows/ci.yml/badge.svg)](https://github.com/neemchand/bookify-api/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
 An event ticketing API for high-contention seat inventory: users race for limited seats,
 bookings hold inventory with an expiry window, payments confirm them, and every state
 change flows through **Kafka** to independent consumer services.
@@ -166,3 +170,16 @@ src/
 ```
 
 Seeded logins — admin: `admin@bookify.dev` / `admin12345`, user: `alice@example.com` / `alice12345`.
+
+## Contributing
+
+Contributions are welcome! Bug reports, docs, tests, and features all help. Start with the
+[Contributing guide](CONTRIBUTING.md), and please follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+Good first steps live in the [Roadmap](#roadmap) above and in the
+[open issues](https://github.com/neemchand/bookify-api/issues).
+
+Found a security issue? Please report it privately — see [SECURITY.md](SECURITY.md).
+
+## License
+
+Released under the [MIT License](LICENSE). © 2026 Neemchand.

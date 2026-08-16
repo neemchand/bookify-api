@@ -19,9 +19,28 @@
     "infra:up": "docker compose up -d --wait",
     "infra:down": "docker compose down"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "fastify",
+    "prisma",
+    "postgresql",
+    "redis",
+    "kafka",
+    "typescript",
+    "booking",
+    "ticketing",
+    "event-driven",
+    "rest-api"
+  ],
+  "author": "Neemchand",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neemchand/bookify-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/neemchand/bookify-api/issues"
+  },
+  "homepage": "https://github.com/neemchand/bookify-api#readme",
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
